@@ -10,7 +10,7 @@ from six.moves import range
 
 
 # Parameters for the model and dataset
-TRAINING_SIZE = 100000
+TRAINING_SIZE = 100
 # Try replacing GRU, or SimpleRNN or LSTM
 RNN = recurrent.SimpleRNN
 HIDDEN_SIZE = 64
@@ -157,7 +157,7 @@ def main():
                   metrics=['accuracy'])
 
     # Train the model each generation and show predictions against the validation dataset
-    for iteration in range(1, 50):
+    for iteration in range(1, 2):
         print()
         print('-' * 50)
         print('Iteration', iteration)
@@ -169,6 +169,9 @@ def main():
             ind = np.random.randint(0, len(X_val))
             rowX, rowy = X_val[np.array([ind])], y_val[np.array([ind])]
             preds = model.predict_classes(rowX, verbose=0)
+            print(rowX)
+            print(rowy)
+            print(preds)
             q = ctable.decode(rowX[0])
             correct = ctable.decode(rowy[0])
             guess = ctable.decode(preds[0], calc_argmax=False)
