@@ -10,6 +10,7 @@ from keras.optimizers import SGD
 import numpy as np
 from six.moves import range
 
+DATA_FILE = '000333 (1).csv'
 
 # Parameters for the model and dataset
 TRAINING_SIZE = 10000
@@ -23,7 +24,7 @@ INPUT_LENGTH = 10 # 输入数据长度 7天
 MAXLEN_q = INPUT_LENGTH # 7天数据
 MAXLEN_a = 1 # 1天数据
 MAXW_q = 8 # 星期几，涨跌%
-MAXW_a = 5 #
+MAXW_a = 21 #
 
 
 class colors:

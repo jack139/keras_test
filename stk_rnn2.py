@@ -206,8 +206,9 @@ def main(model=None):
         print()
         print('-' * 50)
         print('Iteration', iteration)
-        model.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=10,
-                  validation_data=(X_val, y_val))
+        model.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=10, #validation_split=0.1,
+                validation_data=(X_val, y_val)
+        )
         ###
         # Select samples from the validation set at random so we can visualize errors
         for i in range(5):
@@ -233,6 +234,16 @@ def main(model=None):
 
 def test_model(model): # 测试全部样本
     X, y = prepare_data(TRAINING_SIZE)
+
+    # Explicitly set apart 10% for validation data that we never train over
+    split_at = len(X) - len(X) / 10
+    (X_train, X_val) = (slice_X(X, 0, split_at), slice_X(X, split_at))
+    (y_train, y_val) = (y[:split_at], y[split_at:])
+
+    X = X_val
+    y = y_val
+    #X = X_train
+    #y = y_train
 
     print('Guessing ... ')
     b = b2 = 0
